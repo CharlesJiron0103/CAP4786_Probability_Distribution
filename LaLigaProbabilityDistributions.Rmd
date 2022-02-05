@@ -1,0 +1,360 @@
+---
+title: "Probability Distributions"
+Name: "Charles Jiron"
+Date: "02-03-2022"
+output: html_notebook
+---
+
+# Installing the Packages
+
+```{r}
+install.packages("tidyverse")
+install.packages("readr")
+```
+
+```{r}
+install.packages("moments")
+```
+
+
+# Load the Packages
+
+```{r}
+library(tidyverse)
+library(readr)
+library(moments)
+```
+
+# Getting the data set
+
+```{r}
+LaLiga <- read.csv("Liga.csv")
+
+LaLiga
+```
+
+## Getting access to the summary of the data set
+
+```{r}
+summary(LaLiga)
+```
+
+# First Quesiton
+## Given a Goal difference of 18, predict the position and display its visuals.
+
+```{r}
+# Given a Goal difference of 18, predict the position.
+
+# Create a data frame with a single Goal Difference entry.
+
+GoalDifferenceTest <- data_frame(GoalDifference = c(18))
+
+GoalDifferenceTest
+```
+
+## Linear Regression
+
+```{r}
+ModelGoalDifference <- lm(data = LaLiga, Position ~ GoalDifference)
+
+ModelGoalDifference
+```
+
+
+## Predict the position with the data set and test data set
+
+```{r}
+#> Predict the position with the data set and test data set
+
+PredictedPositionFirstQuestion <- predict(ModelGoalDifference, GoalDifferenceTest)
+cat("At 18 GD, the position is: ", PredictedPositionFirstQuestion)
+```
+
+## Verification
+
+```{r}
+# Let's see the average position at 18 goal difference
+
+# Output table with Goal Difference of 18
+
+GD18 <- subset(LaLiga, GoalDifference == 18)
+
+GD18
+```
+
+## Calculating the Statistical Data
+
+```{r}
+#> Calculate the average and SD of position when GD is 18
+
+PositionAverage <- mean(GD18$Position)
+
+cat("Average:", PositionAverage)
+
+PositionSD <- sd(GD18$Position)
+
+cat("\nSD:", PositionSD)
+
+PositionRange <- range(GD18$Position)
+
+cat("\nRange:",PositionRange)
+
+PositionMedian <- median(GD18$Position)
+
+cat("\nMedian:",PositionMedian)
+```
+
+## Calculating the Data's Skewedness
+
+## Shapiro-Wilk with the GD18 data set
+
+```{r}
+# If the function is greater than 5% or 0.05 than it is normally distributed.
+
+shapiro.test(GD18$Position)
+```
+ANSWER: The plot is normally distributed because the p-value that is given from the function is greater than 0.05 or 5% making the data set a normally distributed plot.
+
+
+## First Distribution Histogram
+
+```{r}
+ggplot(data = GD18) + geom_histogram(mapping = aes(x = Position, fill = Team), color = "black", bins = 15) + labs(title = "Position Vs. Goal Difference", subtitle = "Goal Difference of 18 - Through Different Seasons", x = "Team Position", y = "Amount of Goal Difference", caption = "Kaggle Data Set")
+```
+
+## Checking the Skewness of the Histogram
+
+```{r}
+# Calculate Skewness
+skewness(GD18$Position)
+
+# Calculate Kurtosis
+kurtosis(GD18$Position)
+
+# Goodness-of-fit test that determines whether or not sample data have skewness and kurtosis that matches a normal distribution.
+
+# Null Hypothesis: The data set has a skewness and kurtosis that matches a normal distribution.
+
+# Alternative Hypothesis: The data set has a skewness and kurtosis that does not match a normal distribution.
+
+jarque.test(GD18$Position)
+
+cat("The p-value of the test turns out to be 0.8656. Since this value is not less than α = .05, we fail to rejec the null hypothesis. We do not have sufficient evidence to say that this dataset has a skewness and kurtosis that is different from the normal distribution. ")
+```
+
+Follow up: The Histogram Distribution helps me identify how many teams had a goal difference of 18 through different seasons. For example, in two different seasons Real Madrid had a goal difference of 18, while positioning themselves at the fourth position each seasons.
+
+
+# Second Quesiton
+## How many teams have scored less than or equal to 23 in one season, predict the score and display its visuals.
+
+```{r}
+# How many teams have scored less than or equal to 23 in different seasons.
+
+# Create a data frame with a single score entry.
+
+scoreEqualto23 <- data_frame(Scored = c(23))
+
+scoreEqualto23
+```
+
+## Linear Regression
+
+```{r}
+ModelScore <- lm(data = LaLiga, Position ~ Scored)
+
+ModelScore
+```
+
+## Predict the scored with the data set and test data set
+
+```{r}
+#> Predict the scored with the data set and test data set
+
+PredictedScoredSecondQuestion <- predict(ModelScore, scoreEqualto23)
+cat("At score equal to 23 or less, the position is: ", PredictedScoredSecondQuestion)
+```
+
+
+## Verification
+
+```{r}
+# Let's see the average scored of teams with a less than or equal to 23 score
+
+# Output table with position of the teams that scored <= 23
+
+scored23 <- subset(LaLiga, Scored <= 23)
+
+scored23
+```
+
+## Calculating the Statistical Data
+
+```{r}
+#> Calculate the average and SD of position when score is <= 23
+
+ScoredAverage <- mean(scored23$Scored)
+
+cat("Average:", ScoredAverage)
+
+ScoredSD <- sd(scored23$Scored)
+
+cat("\nSD:", ScoredSD)
+
+ScoredRange <- range(scored23$Scored)
+
+cat("\nRange:", ScoredRange)
+
+ScoredMedian <- median(scored23$Scored)
+
+cat("\nMedian:",ScoredMedian)
+```
+
+## Calculating the Data's Skewedness
+
+## Shapiro-Wilk with the scored23 data set
+
+```{r}
+# If the function is greater than 5% or 0.05 than it is normally distributed.
+
+shapiro.test(scored23$Scored)
+```
+
+ANSWER: The plot is normally distributed because the p-value that is given from the function is greater than 0.05 or 5% making the data set a normally distributed plot.
+
+## Second Distribution Histogram
+
+```{r}
+ggplot(data = scored23) + geom_histogram(mapping = aes(x = Scored, fill = Team), color = "black", bins = 15) + labs(title = "Position Vs. Scores", subtitle = "Goal Scores of 23 or less - Through One Seasons", x = "Scores", y = "Amount in One Season", caption = "Kaggle Data Set")
+```
+
+## Checking the Skewness of the Histogram
+
+```{r}
+# Calculate Skewness
+skewness(scored23$Scored)
+
+# Calculate Kurtosis
+kurtosis(scored23$Scored)
+
+# Goodness-of-fit test that determines whether or not sample data have skewness and kurtosis that matches a normal distribution.
+
+# Null Hypothesis: The data set has a skewness and kurtosis that matches a normal distribution.
+
+# Alternative Hypothesis: The data set has a skewness and kurtosis that does not match a normal distribution.
+
+jarque.test(scored23$Scored)
+
+cat("The p-value of the test turns out to be 0.7778. Since this value is not less than α = .05, we fail to rejec the null hypothesis. We do not have sufficient evidence to say that this dataset has a skewness and kurtosis that is different from the normal distribution. ")
+```
+
+
+Follow up: The Histogram Distribution helps me identify how many teams had scored at least 23 or less through one season.
+For example, in one season, at least three teams have scored 23 goals or less. Which are Cordoba, Logrones, and Malaga.
+
+# Third Question
+## How many teams has had at least 30 or greater wins in a given season, predict the win and display its visuals.
+
+```{r}
+# How many teams has had at least 30 or greater wins in a given season
+
+# Create a data frame with a single win entry.
+
+Liga30Wins <- data_frame(Won = c(30))
+
+Liga30Wins
+```
+
+## Linear Regression
+
+```{r}
+ModelWins <- lm(data = LaLiga, Position ~ Won)
+
+ModelWins
+```
+
+## Predict the wins with the data set and test data set
+
+```{r}
+#> Predict the scored with the data set and test data set
+
+PredictedWonsThirdQuestion <- predict(ModelWins, Liga30Wins)
+cat("At wins equal to 30 or greater, the position is: ", PredictedWonsThirdQuestion)
+```
+
+## Verification
+
+```{r}
+# Let's see the average wins of at least 30 or greater
+
+# Output table with wins at 30 or greater
+
+Wins30 <- subset(LaLiga, Won >= 30)
+
+Wins30
+```
+
+## Calculating the Statistical Data
+
+```{r}
+#> Calculate the average and SD of wins when wins is >= 30
+
+WonAverage <- mean(Wins30$Won)
+
+cat("Average:", WonAverage)
+
+WinsSD <- sd(Wins30$Won)
+
+cat("\nSD:", WinsSD)
+
+WinsRange <- range(Wins30$Won)
+
+cat("\nRange:", WinsRange)
+
+WinsMedian <- median(Wins30$Won)
+
+cat("\nMedian:", WinsMedian)
+```
+
+## Calculating the Data's Skewedness
+
+## Shapiro-Wilk with the Wins30 data set
+
+```{r}
+# If the function is greater than 5% or 0.05 than it is normally distributed.
+
+shapiro.test(Wins30$Won)
+```
+
+ANSWER: The plot is normally distributed because the p-value that is given from the function is greater than 0.05 or 5% making the data set a normally distributed.
+
+## Third Distribution Histogram
+
+```{r}
+ggplot(data = Wins30) + geom_histogram(mapping = aes(x = Won, fill = Team), color = "black", bins = 15) + labs(title = "Wins Vs. Tota Amount of Wins", subtitle = "Wins greater than or equal to 30 - (Through multiple Seasons)", x = "How Many Wins", y = "Amount of Wins", caption = "Kaggle Data Set")
+```
+
+## Checking the Skewness of the Histogram
+
+```{r}
+# Calculate Skewness
+skewness(Wins30$Won)
+
+# Calculate Kurtosis
+kurtosis(Wins30$Won)
+
+# Goodness-of-fit test that determines whether or not sample data have skewness and kurtosis that matches a normal distribution.
+
+# Null Hypothesis: The data set has a skewness and kurtosis that matches a normal distribution.
+
+# Alternative Hypothesis: The data set has a skewness and kurtosis that does not match a normal distribution.
+
+jarque.test(Wins30$Won)
+
+cat("The p-value of the test turns out to be 0.6877. Since this value is not less than α = .05, we fail to rejec the null hypothesis. We do not have sufficient evidence to say that this dataset has a skewness and kurtosis that is different from the normal distribution. ")
+```
+
+
+
+Follow up: The Histogram Distribution helps me identify how many teams had won at least 30 or more through a season.
+For example, in multiple seasons, Barcelona has had at least two season with 30 wins. On the other hand, Real Madrid has but only one seasons with 30 wins.
