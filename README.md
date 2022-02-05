@@ -15,6 +15,7 @@ First Distribution Histogram
 Follow up: The Histogram Distribution helps me identify how many teams had a goal difference of 18 through different seasons. For example, in two different seasons Real Madrid had a goal difference of 18, while positioning themselves at the fourth position each seasons.
 
 
+
 Second Question:
 
 How many teams have scored 23 or less in one season, predict the score and display its visuals.
@@ -26,6 +27,7 @@ Second Distribution Histogram
 ![image](https://user-images.githubusercontent.com/75334406/152633689-192f658d-f0e3-4f0c-abea-02eda0a404c3.png)
 
 Follow up: The Histogram Distribution helps me identify how many teams had scored at least 23 or less through one season. For example, in one season, at least three teams have scored 23 goals or less. Which are Cordoba, Logrones, and Malaga.
+
 
 Third Question:
 
