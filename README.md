@@ -3,7 +3,7 @@ Probability Distribution Assignment
 
 
 ## *First Question*:
-*"Given a Goal Difference of 18, predict the position and display its visuals"*.
+*"Given a Goal Difference of 18, predict the position and display its visuals?"*
 
 ![image](https://user-images.githubusercontent.com/75334406/152633542-74a196ab-fcbf-4858-91fd-fa404e0dad0e.png)
 
