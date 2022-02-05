@@ -2,16 +2,16 @@
 Probability Distribution Assignment
 
 
-## *First Question*:
+# *First Question*:
 *"Given a Goal Difference of 18, predict the position and display its visuals?"*
 
 ![image](https://user-images.githubusercontent.com/75334406/152633542-74a196ab-fcbf-4858-91fd-fa404e0dad0e.png)
 
-First Distribution Histogram
+## *First Distribution Histogram*:
 
 ![image](https://user-images.githubusercontent.com/75334406/152633621-4d823064-d36f-48fa-b3cc-25a271ea187b.png)
 
-Follow up: The Histogram Distribution helps me identify how many teams had a goal difference of 18 through different seasons. For example, in two different seasons Real Madrid had a goal difference of 18, while positioning themselves at the fourth position each seasons.
+*Follow up: The Histogram Distribution helps me identify how many teams had a goal difference of 18 through different seasons. For example, in two different seasons Real Madrid had a goal difference of 18, while positioning themselves at the fourth position each seasons.
 
 
 
