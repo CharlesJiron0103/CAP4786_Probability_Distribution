@@ -11,7 +11,7 @@ Probability Distribution Assignment
 
 ![image](https://user-images.githubusercontent.com/75334406/152633621-4d823064-d36f-48fa-b3cc-25a271ea187b.png)
 
-*Follow up: The Histogram Distribution helps me identify how many teams had a goal difference of 18 through different seasons. For example, in two different seasons Real Madrid had a goal difference of 18, while positioning themselves at the fourth position each seasons.
+*Follow up: The Histogram Distribution helps me identify how many teams had a goal difference of 18 through different seasons. For example, in two different seasons Real Madrid had a goal difference of 18, while positioning themselves at the fourth position each seasons.*
 
 
 
